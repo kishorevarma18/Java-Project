@@ -1,0 +1,1 @@
+This repository is dedicated to learning and practicing Full Stack Java Development. It includes work on core Java concepts, backend development, and basic frontend integration, along with small projects to build practical skills. The goal is to gain a strong understanding of both frontend and backend technologies and gradually develop complete, real-world applications.
