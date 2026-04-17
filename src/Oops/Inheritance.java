@@ -44,8 +44,8 @@ class D extends C{
 }
 public class Inheritance{
     public static void main(String[] args) {
-      B b = new B("kishore");
-      D d = new D("varma");
+      new B("kishore");
+      new D("varma");
       new B();
     }
 }
