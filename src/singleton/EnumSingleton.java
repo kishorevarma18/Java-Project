@@ -1,4 +1,4 @@
-package Singleton;
+package singleton;
 
 /*
 INSTANCE is the only object

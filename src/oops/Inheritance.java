@@ -1,4 +1,4 @@
-package Oops;
+package oops;
 
 class A{
     A(){
