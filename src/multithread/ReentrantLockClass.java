@@ -48,7 +48,7 @@ public class ReentrantLockClass {
             if (lock.tryLock(20, TimeUnit.MILLISECONDS)) {
                 try {
                     if (amount <= Balance) {
-                        Thread.sleep(90); // If enabled, 90ms > 20ms timeout, causing others to fail.
+                        //Thread.sleep(90); // If enabled, 90ms > 20ms timeout, causing others to fail.
                         Balance -= amount;
                         System.out.println(Thread.currentThread().getName() + ": withdrew " + amount + ". Total: " + Balance);
                     } else {
@@ -77,6 +77,7 @@ public class ReentrantLockClass {
             * 3. By calling interrupt(), we "re-flag" the thread so its status is correct.
             */
             Thread.currentThread().interrupt();
+            // it is a good practice to interrupt manually in catch block!!
         }
     }
 
