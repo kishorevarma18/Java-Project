@@ -48,13 +48,15 @@ public class ReentrantLockClass {
             if (lock.tryLock(20, TimeUnit.MILLISECONDS)) {
                 try {
                     if (amount <= Balance) {
-                        // Thread.sleep(90); // If enabled, 90ms > 20ms timeout, causing others to fail.
+                        Thread.sleep(90); // If enabled, 90ms > 20ms timeout, causing others to fail.
                         Balance -= amount;
                         System.out.println(Thread.currentThread().getName() + ": withdrew " + amount + ". Total: " + Balance);
                     } else {
                         System.out.println(Thread.currentThread().getName() + ": insufficient balance!");
                     }
-                } finally {
+                } 
+                
+                finally {
                     /**
                      * Nested unlock(): We only unlock if tryLock successfully returned TRUE.
                      */
@@ -66,8 +68,15 @@ public class ReentrantLockClass {
                  */
                 System.err.println(Thread.currentThread().getName() + ": Thread Blocked (Wait timeout expired)!!");
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.out.println("Error: " + e.getMessage());
+            /**
+            * WHY INTERRUPT HERE?
+            * 1. When InterruptedException is caught, Java clears the 'interrupted' flag.
+            * 2. Other parts of the code or a ThreadPool might check this flag to stop safely.
+            * 3. By calling interrupt(), we "re-flag" the thread so its status is correct.
+            */
+            Thread.currentThread().interrupt();
         }
     }
 
