@@ -95,3 +95,35 @@ public class DeadLockExample {
         task2.start();
     }
 }
+/*
+how to resolve deadlocks--
+
+To resolve deadlocks, you essentially need to break one of the four Coffman conditions (Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait).
+In a programming context like Java, here are the most effective strategies:
+1. Fixed Lock Ordering (Best for Simple Cases)
+Ensure every thread acquires locks in the exact same order.
+Rule: If you need Resource A and Resource B, always lock A then B.
+Result: This eliminates the Circular Wait condition. One thread will wait for the first lock, preventing it from ever "half-holding" resources.
+
+2. Timed Locking (Using tryLock)
+Instead of using synchronized, use ReentrantLock with a timeout.
+Logic: If a thread cannot get all required locks within 500ms, it gives up and releases any locks it currently holds.
+Result: This breaks the Hold and Wait condition. The thread "backs off" so others can finish.
+
+3. Minimize Lock Scope
+Reduce the amount of code inside synchronized blocks.
+Logic: Only lock the specific line of code that updates data.
+Result: This reduces the "window of opportunity" for a deadlock to occur.
+
+4. Use Higher-Level Concurrency Utilities
+Avoid manual locking by using thread-safe classes from java.util.concurrent:
+ConcurrentHashMap: Handles its own internal locking.
+AtomicInteger: Uses lock-free hardware instructions (Compare-and-Swap).
+Semaphore: Limits the number of threads accessing a group of resources.
+
+Strategy||Condition Broken||Java Tool
+Lock Ordering||Circular Wait||Standard synchronized
+TryLock||Hold and Wait||ReentrantLock.tryLock()
+Preemption||No Preemption||Thread.interrupt()
+Immutability||Mutual Exclusion||final keyword / Immutable objects
+*/
