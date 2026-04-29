@@ -29,8 +29,9 @@ public class Task implements Runnable {
         try {
             // Simulating work
             Thread.sleep(sleepTime);
+            System.out.println("Task " + id + " is completed on: " + threadName);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             /* 
              * INTERRUPT PROPAGATION:
              * Very important! If the ExecutorService calls shutdownNow(), 
@@ -39,6 +40,5 @@ public class Task implements Runnable {
              */
             Thread.currentThread().interrupt();
         }
-        System.out.println("Task " + id + " is completed on: " + threadName);
     }
 }
