@@ -8,11 +8,14 @@ package executor;
  */
 public class Task implements Runnable {
     private int id;
-
+    private Long sleepTime;
     public Task(int id) {
-        this.id = id;
+        this(id,1000L);
     }
-
+    public Task(int id, Long sleepTime){
+        this.id = id;
+        this.sleepTime = sleepTime;
+    }
     @Override
     public void run() {
         /* 
@@ -25,7 +28,7 @@ public class Task implements Runnable {
 
         try {
             // Simulating work
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
             /* 
