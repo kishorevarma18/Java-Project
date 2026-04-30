@@ -2,7 +2,14 @@ package executor.concurrencyutilities;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
+/*
+A CountDownLatch is a synchronization utility that allows one or more threads to wait until a set of operations being performed in other threads completes.
+Think of it like a starting gate at a race or a security checkpoint: the gate doesn't open until every single runner is lined up.
+You initialize the latch with a count (the number of things to wait for)
+.await(): The main thread calls this to stop and wait
+.countDown(): Each worker thread calls this when they finish their task.
+Opening: Once the count reaches zero, the waiting thread is "released" and continues its work.
+*/
 public class CountDownLatchClass {
     public static void main(String[] args) {
         
