@@ -53,6 +53,14 @@ public class CachedThreadPool {
              * Because they run in parallel on separate threads, the 5-second 
              * wait here should be plenty of time for all tasks to finish.
              */
+            /* 
+            * IMPORTANT: awaitTermination method has THREE possible outcomes:
+            * 1. RETURNS 'true': All tasks finished before the timeout.
+            * 2. RETURNS 'false': The timeout was reached but tasks are still running.
+            *    (This is NOT an exception; it just means "time is up").
+            * 3. THROWS InterruptedException: The thread waiting here was 
+            *    interrupted by another thread (e.g., app shutdown).
+            */
             if(!executor.awaitTermination(5, TimeUnit.SECONDS)){
                 executor.shutdownNow();
             }
